@@ -1,7 +1,13 @@
 const express = require("express");
 const app = express();
 const http = require("http");
+
+const port = process.env.PORT || 3001;
 const server = http.createServer(app);
+
+server.listen(port, () => {
+  console.log(`listening on *:${port}`);
+});
 
 // Initialise new instance of socket.io by passing
 // the server object
@@ -15,8 +21,9 @@ app.get("/", (req, res) => {
 
 // listen for connection events and log to console when new connection occurs
 io.on("connection", (socket) => {
-  io.emit("new user", io.engine.clientsCount + " users online");
-  console.log("a user connected");
+  //io.emit("new user", io.engine.clientsCount + " users online");
+  socket.emit("connection", null); //using to check if front-end connected to the server
+  // console.log("a user connected");
 
   //Listen for disconnection events
   socket.on("disconnect", () => {
@@ -31,8 +38,4 @@ io.on("connection", (socket) => {
 
     console.log("new message: " + msg);
   });
-});
-
-server.listen(3000, () => {
-  console.log("listening on *:3000");
 });
