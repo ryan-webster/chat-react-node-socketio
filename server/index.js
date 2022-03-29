@@ -8,8 +8,6 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
-//
-
 var path = require("path");
 app.get("/", (req, res) => {
   res.sendFile(path.resolve("../client/index.html"));
@@ -17,10 +15,12 @@ app.get("/", (req, res) => {
 
 // listen for connection events and log to console when new connection occurs
 io.on("connection", (socket) => {
+  io.emit("new user", io.engine.clientsCount + " users online");
   console.log("a user connected");
 
   //Listen for disconnection events
   socket.on("disconnect", () => {
+    io.emit("new user", io.engine.clientsCount + " users online");
     console.log("user disconnected");
   });
 

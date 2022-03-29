@@ -84,6 +84,14 @@
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
       });
+
+
+      socket.on("new user", function (msg) {
+        var item = document.createElement("li"); //list item
+        item.textContent = msg;
+        messages.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+      });
     </script>
   <body>
 </html>
