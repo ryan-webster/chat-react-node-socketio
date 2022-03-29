@@ -9,8 +9,10 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 
 //
+
+var path = require("path");
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(path.resolve("../client/index.html"));
 });
 
 // listen for connection events and log to console when new connection occurs
