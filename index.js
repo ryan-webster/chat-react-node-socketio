@@ -17,9 +17,15 @@ app.get('/', (req, res) => {
 // listen for connection events and log to console when new connection occurs
 io.on('connection', (socket) => {
   console.log('a user connected');
+  
   //Listen for disconnection events
   socket.on('disconnect', () => {
     console.log('user disconnected');
+  });
+
+  //Listen for chat message events
+  socket.on('chat message', (msg) => {
+    console.log('new message: ' + msg);
   });
 });
 
