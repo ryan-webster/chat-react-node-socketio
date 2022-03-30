@@ -14,20 +14,20 @@ server.listen(port, () => {
 const { Server } = require("socket.io");
 const io = new Server(server);
 
-var path = require("path");
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve("../client/index.html"));
-});
+// var path = require("path");
+// app.get("/", (req, res) => {
+//   res.sendFile(path.resolve("../client/index.html"));
+// });
 
 // listen for connection events and log to console when new connection occurs
 io.on("connection", (socket) => {
-  //io.emit("new user", io.engine.clientsCount + " users online");
-  socket.emit("connection", null); //using to check if front-end connected to the server
+  io.emit("new user", io.engine.clientsCount);
+
+  // socket.emit("connection", null); //using to check if front-end connected to the server
   // console.log("a user connected");
 
   //Listen for disconnection events
   socket.on("disconnect", () => {
-    io.emit("new user", io.engine.clientsCount + " users online");
     console.log("user disconnected");
   });
 

@@ -1,16 +1,16 @@
 import React from "react";
-import { Message } from "./Message";
 import "./MessageContainer.css";
 
 export const MessageContainer = (props) => {
   return (
     <ul className="messagecontainer">
-      {
-        <div>Hello there</div>
-        /* {props.messages.map((msg) => (
-        <Message key={"123123"} /> */
-      }
-      {/* ))} */}
+      {props.chatList.map((item) => (
+        <li className="messageitem" key={item.id}>
+          {item.message}
+        </li>
+      ))}
     </ul>
   );
 };
+
+export default MessageContainer;
